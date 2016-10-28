@@ -1,10 +1,7 @@
 package ru.ok.helpers;
 
 import ru.ok.data.Gender;
-import ru.ok.steps.ProfilePageSteps;
-import ru.ok.steps.SettingsSteps;
 
-import java.io.SyncFailedException;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -43,7 +40,7 @@ public class LangHelper {
      * 43 года = 2;
      * 48 лет = 3;
      */
-    public static int plurals(int count) {
+    private static int plurals(int count) {
         if (count == 1) return 0;
         if (count >= 11 && count <= 19) return 3;
         else {
