@@ -1,12 +1,10 @@
 package ru.ok.elements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
-import ru.ok.data.City;
 import ru.ok.data.Gender;
 import ru.ok.pages.Page;
 
@@ -37,7 +35,14 @@ public class UserDataPopup extends Page {
     @FindBy(css = "[name='button_savePopLayerEditUserProfileNew']")
     private WebElement saveButton;
 
-    private String genderField= "[name='fr.gender'][value='%s']";
+    private String genderField = "[name='fr.gender'][value='%s']";
+
+    private String cityResidenceSuggests = "//*[@id='citySugg_SuggestItems']";
+    private String cityBirthSuggests = "//*[@id='cityBSugg_SuggestItems']";
+    private String cityResidenceFirstSuggest = cityResidenceSuggests + "/li[1]";
+    private String cityBirthFirstSuggest = cityBirthSuggests + "/li[1]";
+    private String cityResidenceSuggest = cityResidenceSuggests+ "/li[.//*[text()='%s']]";
+    private String cityBirthSuggest = cityBirthSuggests+ "/li[.//*[text()='%s']]";
 
     public UserDataPopup(WebDriver driver) {
         super(driver);
@@ -105,20 +110,18 @@ public class UserDataPopup extends Page {
      * Вводит место проживания
      * @param city
      */
-    public void setCityOfResidence(City city) {
+    public void setCityOfResidence(String city) {
         cityResidenceField.clear();
-        cityResidenceField.sendKeys(city.getFullName());
-        cityResidenceField.sendKeys(Keys.TAB);
+        cityResidenceField.sendKeys(city);
     }
 
     /**
      * Вводит место рождения
      * @param city
      */
-    public void setCityOfBirth(City city) {
+    public void setCityOfBirth(String city) {
         cityBirthField.clear();
-        cityBirthField.sendKeys(city.getFullName());
-        cityBirthField.sendKeys(Keys.TAB);
+        cityBirthField.sendKeys(city);
     }
 
     /**
@@ -126,5 +129,37 @@ public class UserDataPopup extends Page {
      */
     public void clickSaveButton() {
         saveButton.click();
+    }
+
+    /**
+     * Проверяет наличие списка саджестов у поля город проживания
+     */
+    public boolean cityOfResidenceSuggestsIsPresent() {
+        return waitForElementPresent(By.xpath(cityResidenceFirstSuggest));
+    }
+
+    /**
+     * Проверяет наличие списка саджестов у поля город рождения
+     */
+    public boolean cityOfBirthSuggestsIsPresent() {
+        return waitForElementPresent(By.xpath(cityBirthFirstSuggest));
+    }
+
+    /**
+     * Выбирает саджест из списка
+     * @param city
+     */
+    public void selectResidenceSuggest(String city) {
+        String locator = String.format(cityResidenceSuggest, city);
+        element(By.xpath(locator)).click();
+    }
+
+    /**
+     * Выбирает саджест из списка
+     * @param city
+     */
+    public void selectBirthSuggest(String city) {
+        String locator = String.format(cityBirthSuggest, city);
+        element(By.xpath(locator)).click();
     }
 }

@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import qa.waiting.InvisibilityOfElement;
 import qa.waiting.VisibilityOfElement;
+import qa.waiting.VisibilityOfElementLocated;
 
 import java.util.concurrent.TimeUnit;
 
@@ -49,6 +50,27 @@ public class AbstractPage {
         WebDriverWait wait = new WebDriverWait(driver, implicitWait, 500);
         try {
             wait.until(new VisibilityOfElement(element));
+        } catch (TimeoutException e) {
+            result = false;
+        } catch (Throwable t) {
+            throw new Error(t);
+        } finally {
+            resetImplicitTimeout();
+        }
+        return result;
+    }
+
+    /**
+     * Ожидание видимого элемента
+     * @param by локатор
+     * @return
+     */
+    protected boolean waitForElementPresent(By by) {
+        setImplicitTimeout(0);
+        Boolean result = true;
+        WebDriverWait wait = new WebDriverWait(driver, implicitWait, 500);
+        try {
+            wait.until(new VisibilityOfElementLocated(by));
         } catch (TimeoutException e) {
             result = false;
         } catch (Throwable t) {

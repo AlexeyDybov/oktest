@@ -54,8 +54,15 @@ public class ChangeUserData_Test extends BaseTest {
         userDataPopupSteps.setLastName(oldAccount.getLastName());
         userDataPopupSteps.setBirthday(oldAccount.getBirthDate());
         userDataPopupSteps.setGender(oldAccount.getGender());
+
         userDataPopupSteps.setCityOfResidence(oldAccount.getCityOfResidence());
+        userDataPopupSteps.cityOfResidenceSuggestsShouldBePresent();
+        userDataPopupSteps.selectCityOfResidenceSuggest(oldAccount.getCityOfResidence());
+
         userDataPopupSteps.setCityOfBirth(oldAccount.getCityOfBirth());
+        userDataPopupSteps.cityOfBirthSuggestsShouldBePresent();
+        userDataPopupSteps.selectCityOfBirthSuggest(oldAccount.getCityOfResidence());
+
         userDataPopupSteps.clickSaveButton();
         userDataPopupSteps.userDataPopupShouldNotBePresent();
 
@@ -80,8 +87,15 @@ public class ChangeUserData_Test extends BaseTest {
         userDataPopupSteps.setLastName(newAccount.getLastName());
         userDataPopupSteps.setBirthday(newAccount.getBirthDate());
         userDataPopupSteps.setGender(newAccount.getGender());
+
         userDataPopupSteps.setCityOfResidence(newAccount.getCityOfResidence());
+        userDataPopupSteps.cityOfResidenceSuggestsShouldBePresent();
+        userDataPopupSteps.selectCityOfResidenceSuggest(newAccount.getCityOfResidence());
+
         userDataPopupSteps.setCityOfBirth(newAccount.getCityOfBirth());
+        userDataPopupSteps.cityOfBirthSuggestsShouldBePresent();
+        userDataPopupSteps.selectCityOfBirthSuggest(newAccount.getCityOfResidence());
+
         userDataPopupSteps.clickSaveButton();
         userDataPopupSteps.userDataPopupShouldNotBePresent();
 

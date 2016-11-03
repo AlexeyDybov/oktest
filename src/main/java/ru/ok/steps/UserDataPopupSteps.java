@@ -75,7 +75,15 @@ public class UserDataPopupSteps extends Steps{
      * @param city
      */
     public void setCityOfResidence(City city) {
-        userDataPopup.setCityOfResidence(city);
+        userDataPopup.setCityOfResidence(city.getFullName());
+    }
+
+    /**
+     * Проверяет наличие списка саджестов у поля город проживания
+     */
+    public void cityOfResidenceSuggestsShouldBePresent() {
+        Assert.assertTrue("Не появился список саджестов у поля [Город проживания]",
+            userDataPopup.cityOfResidenceSuggestsIsPresent());
     }
 
     /**
@@ -83,7 +91,15 @@ public class UserDataPopupSteps extends Steps{
      * @param city
      */
     public void setCityOfBirth(City city) {
-        userDataPopup.setCityOfBirth(city);
+        userDataPopup.setCityOfBirth(city.getFullName());
+    }
+
+    /**
+     * Проверяет наличие списка саджестов у поля город рождения
+     */
+    public void cityOfBirthSuggestsShouldBePresent() {
+        Assert.assertTrue("Не появился список саджестов у поля [Город рождения]",
+            userDataPopup.cityOfBirthSuggestsIsPresent());
     }
 
     /**
@@ -91,5 +107,21 @@ public class UserDataPopupSteps extends Steps{
      */
     public void clickSaveButton() {
         userDataPopup.clickSaveButton();
+    }
+
+    /**
+     * Выбирает саджест из списка
+     * @param city
+     */
+    public void selectCityOfResidenceSuggest(City city) {
+        userDataPopup.selectResidenceSuggest(city.getShortName());
+    }
+
+    /**
+     * Выбирает саджест из списка
+     * @param city
+     */
+    public void selectCityOfBirthSuggest(City city) {
+        userDataPopup.selectBirthSuggest(city.getShortName());
     }
 }
