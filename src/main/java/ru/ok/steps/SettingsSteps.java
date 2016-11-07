@@ -7,9 +7,6 @@ import ru.ok.data.Account;
 import ru.ok.helpers.LangHelper;
 import ru.ok.pages.SettingsPage;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 /**
  * Шаги для работы с настройками пользователя
  * Created by Alexey Dybov on 27.10.16.
@@ -59,12 +56,8 @@ public class SettingsSteps extends Steps {
      * @param account
      */
     public void userDataShouldBeSameAs(Account account) {
-        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("d MMMM YYYY", new Locale("ru"));
-        String date = dateTimeFormat.format(account.getBirthDate().getTime());
-
         String expectedText = langHelper.getMessage("userData", account.getFirstName(), account.getLastName(),
-            account.getGender(), date, account.getCityOfBirth().getShortName(), account.getCityOfResidence().getShortName());
-
+            account.getGender(), account.getBirthDate().getTime(), account.getCityOfBirth().getShortName(), account.getCityOfResidence().getShortName());
         Assert.assertEquals("Не совпадают личные данные пользователя на странице настроек",
             expectedText, settingsPage.getUserData());
     }
