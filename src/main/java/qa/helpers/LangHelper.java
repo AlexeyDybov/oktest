@@ -1,4 +1,4 @@
-package ru.ok.helpers;
+package qa.helpers;
 
 import ru.ok.data.Gender;
 

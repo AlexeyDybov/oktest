@@ -3,8 +3,8 @@ package ru.ok.steps;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import qa.helpers.LangHelper;
 import ru.ok.data.Account;
-import ru.ok.helpers.LangHelper;
 import ru.ok.pages.SettingsPage;
 
 /**
